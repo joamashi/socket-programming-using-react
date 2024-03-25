@@ -1,28 +1,28 @@
 import { createContext, useReducer } from "react";
-import { AUTH_INFO } from "./action";
+import { AUTH_INFO } from "./action"; // export const AUTH_INFO = "AUTH_INFO"
 
 const initialState = {
-    userName: "",
+  userName: "",
 };
 
 const Context = createContext({});
 
 const reducer = (state = initialState, action) => {
-    switch (action.type) {
-        case AUTH_INFO:
-            return {
-                ...state,
-                userName: action.payload,
-            };
-        default:
-            return state;
-    }
+  switch (action.type) {
+    case AUTH_INFO:
+      return {
+        ...state,
+        userName: action.payload,
+      };
+    default:
+      return state;
+  }
 };
 
 const StoreProvider = ({ children }) => {
-    const [state, dispatch] = useReducer(reducer, initialState);
-    const value = { state, dispatch };
-    return <Context.Provider value={value}>{children}</Context.Provider>;
+  const [state, dispatch] = useReducer(reducer, initialState);
+  const value = { state, dispatch };
+  return <Context.Provider value={value}>{children}</Context.Provider>;
 };
 
 export { Context, StoreProvider };
